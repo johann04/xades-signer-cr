@@ -1,0 +1,18 @@
+package com.workoutstudioapp.xadessignercr;
+
+public class ObligadoTributario {
+	private String tipoIdentificacion;
+	private String numeroIdentificacion;
+	public String getTipoIdentificacion() {
+		return tipoIdentificacion;
+	}
+	public void setTipoIdentificacion(String tipoIdentificacion) {
+		this.tipoIdentificacion = tipoIdentificacion;
+	}
+	public String getNumeroIdentificacion() {
+		return numeroIdentificacion;
+	}
+	public void setNumeroIdentificacion(String numeroIdentificacion) {
+		this.numeroIdentificacion = numeroIdentificacion;
+	}
+}

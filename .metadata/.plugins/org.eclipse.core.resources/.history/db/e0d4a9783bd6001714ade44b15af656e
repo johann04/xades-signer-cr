@@ -1,0 +1,132 @@
+package com.workoutstudioapp.xadessignercr;
+
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.io.FileUtils;
+import org.apache.http.Header;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.EntityUtils;
+
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+public class Sender {
+	public static final String ENDPOINT = "https://api.comprobanteselectronicos.go.cr/recepcion-sandbox/v1";
+	private static final String CLAVE = "50612101700310168271100100001010000000161100000633";
+	public static void main(String[] args) {
+		try {
+			String xmlPath = "../test-data/out.xml";
+			File file = new File(xmlPath);
+			String base64 = Base64.encodeBase64String(FileUtils.readFileToByteArray(file));
+			ComprobanteElectronico comprobanteElectronico = new ComprobanteElectronico();
+			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
+			comprobanteElectronico.setFecha(format.format(new Date()));
+			comprobanteElectronico.setClave(CLAVE);
+			comprobanteElectronico.setComprobanteXml(base64);
+			comprobanteElectronico.setReceptor(new ObligadoTributario("01", "601190899"));
+			comprobanteElectronico.setEmisor(new ObligadoTributario("01", "205860860"));
+			Sender sender = new Sender();
+			System.out.println("------------------------ send ------------------------");
+			sender.send(ENDPOINT, comprobanteElectronico);
+//			System.out.println("------------------------ list ------------------------");
+//			sender.list(ENDPOINT);
+			
+//			System.out.println("------------------------ query ------------------------");
+//			sender.query("https://api.comprobanteselectronicos.go.cr/recepcion-sandbox/v1/recepcion/" + CLAVE);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	private String getToken() throws Exception {
+		String token = "";
+		HttpClient httpClient = HttpClientBuilder.create().build();
+		HttpPost request = new HttpPost("https://idp.comprobanteselectronicos.go.cr/auth/realms/rut-stag/protocol/openid-connect/token");
+		List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
+		urlParameters.add(new BasicNameValuePair("grant_type", "password"));
+		urlParameters.add(new BasicNameValuePair("client_id", "api-stag"));
+		urlParameters.add(new BasicNameValuePair("client_secret", ""));
+		urlParameters.add(new BasicNameValuePair("scope", ""));
+		urlParameters.add(new BasicNameValuePair("username", "cpf-02-0586-0860@stag.comprobanteselectronicos.go.cr"));
+		urlParameters.add(new BasicNameValuePair("password", "%]Y_Tc;]YD}+D2*CIj]*"));
+		
+	    request.addHeader("content-type", "application/x-www-form-urlencoded");
+	    request.setEntity(new UrlEncodedFormEntity(urlParameters));
+	    HttpResponse response = httpClient.execute(request);
+	    HttpEntity entity = response.getEntity();
+	    String responseString = EntityUtils.toString(entity, "UTF-8");
+	    ObjectMapper objectMapper = new ObjectMapper();
+	    Map<String, Object> res = objectMapper.readValue(responseString, new TypeReference<Map<String, Object>>(){});
+	    token = (String) res.get("access_token");
+		return token;
+	}
+	public void send(String endpoint, ComprobanteElectronico comprobanteElectronico) throws Exception {
+		String token = getToken();
+		HttpClient httpClient = HttpClientBuilder.create().build();
+		HttpPost request = new HttpPost(endpoint + "/recepcion");
+		ObjectMapper objectMapper = new ObjectMapper();
+		String json = objectMapper.writeValueAsString(comprobanteElectronico);
+		System.out.println(json);
+	    StringEntity params = new StringEntity(json);
+	    request.addHeader("content-type", "application/javascript");
+	    request.addHeader("Authorization", "bearer " + token);
+	    request.setEntity(params);
+	    HttpResponse response = httpClient.execute(request);
+	    HttpEntity entity = response.getEntity();
+	    System.out.println("Response code: " + response.getStatusLine().getStatusCode());
+	    printHeaders(response.getAllHeaders());
+	    String responseString = EntityUtils.toString(entity, "UTF-8");
+	    System.out.println(responseString);
+	}
+	private void printHeaders(Header[] headers) {
+		for (Header header : headers) {
+			System.out.println(header.getName() + ": " + header.getValue());
+		}
+	}
+	public void list(String endpoint) throws Exception {
+		String token = getToken();
+		HttpClient httpClient = HttpClientBuilder.create().build();
+		String emisor = "01205860860";
+		HttpGet request = new HttpGet(endpoint + "/comprobantes?offset=0&limit=10&emisor=" + emisor);
+		request.addHeader("Authorization", "bearer " + token);
+
+	    HttpResponse response = httpClient.execute(request);
+	    //printHeaders(response.getAllHeaders());
+	    System.out.println("Response code: " + response.getStatusLine().getStatusCode());
+	    HttpEntity entity = response.getEntity();
+	    String responseString = EntityUtils.toString(entity, "UTF-8");
+	    System.out.println(responseString);
+	}
+	public void query(String url) throws Exception {
+		String token = getToken();
+		HttpClient httpClient = HttpClientBuilder.create().build();
+		String emisor = "01205860860";
+		HttpGet request = new HttpGet(url);
+		request.addHeader("Authorization", "bearer " + token);
+
+	    HttpResponse response = httpClient.execute(request);
+	    //printHeaders(response.getAllHeaders());
+	    System.out.println("Response code: " + response.getStatusLine().getStatusCode());
+	    HttpEntity entity = response.getEntity();
+	    String responseString = EntityUtils.toString(entity, "UTF-8");
+	    ObjectMapper objectMapper = new ObjectMapper();
+	    Map<String, Object> res = objectMapper.readValue(responseString, new TypeReference<Map<String, Object>>(){});
+	    String respuestaXML = (String) res.get("respuesta-xml");
+	    respuestaXML = new String(Base64.decodeBase64(respuestaXML), "UTF-8");
+	    System.out.println(respuestaXML);
+	}
+}

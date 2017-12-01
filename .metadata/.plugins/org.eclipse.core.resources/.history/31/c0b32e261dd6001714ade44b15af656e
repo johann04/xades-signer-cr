@@ -1,0 +1,33 @@
+package com.workoutstudioapp.xadessignercr;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.util.EntityUtils;
+
+public class Sender {
+	public static final String ENDPOINT = "https://api.comprobanteselectronicos.go.cr/recepcion-sandbox/v1/";
+	public static void main(String[] args) {
+		try {
+			Sender sender = new Sender();
+			sender.send(ENDPOINT, "../test-data/out.xml");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public void send(String endpoint, String xmlPath) throws Exception {
+		HttpClient httpClient = HttpClientBuilder.create().build();
+		HttpPost request = new HttpPost(endpoint);
+		String json = "";
+	    StringEntity params = new StringEntity(json);
+	    request.addHeader("content-type", "application/x-www-form-urlencoded");
+	    request.setEntity(params);
+	    HttpResponse response = httpClient.execute(request);
+	    HttpEntity entity = response.getEntity();
+	    String responseString = EntityUtils.toString(entity, "UTF-8");
+	    System.out.println(responseString);
+	}
+}

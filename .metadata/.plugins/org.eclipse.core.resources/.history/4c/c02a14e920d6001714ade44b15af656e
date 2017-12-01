@@ -1,0 +1,81 @@
+package com.workoutstudioapp.xadessignercr;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.io.FileUtils;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.EntityUtils;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+public class Sender {
+	public static final String ENDPOINT = "https://api.comprobanteselectronicos.go.cr/recepcion-sandbox/v1/";
+	public static void main(String[] args) {
+		try {
+			String xmlPath = "../test-data/out.xml";
+			File file = new File(xmlPath);
+			String base64 = Base64.encodeBase64String(FileUtils.readFileToByteArray(file));
+			ComprobanteElectronico comprobanteElectronico = new ComprobanteElectronico();
+			comprobanteElectronico.setFecha(new Date());
+			comprobanteElectronico.setClave("50612101700310168271100100001010000000161100000531");
+			comprobanteElectronico.setComprobanteXml(base64);
+			comprobanteElectronico.setEmisor(new ObligadoTributario("01", "601190899"));
+			comprobanteElectronico.setReceptor(new ObligadoTributario("01", "205860860"));
+			Sender sender = new Sender();
+			sender.send(ENDPOINT, comprobanteElectronico);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	private String getToken() throws Exception {
+		String token = "";
+		HttpClient httpClient = HttpClientBuilder.create().build();
+		HttpPost request = new HttpPost("https://idp.comprobanteselectronicos.go.cr/auth/realms/rut-stag/protocol/openid-connect/token");
+		List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
+		urlParameters.add(new BasicNameValuePair("grant_type", "password"));
+		urlParameters.add(new BasicNameValuePair("client_id", "api-stag"));
+		urlParameters.add(new BasicNameValuePair("client_secret", ""));
+		urlParameters.add(new BasicNameValuePair("scope", ""));
+		urlParameters.add(new BasicNameValuePair("username", "cpf-02-0586-0860@stag.comprobanteselectronicos.go.cr"));
+		urlParameters.add(new BasicNameValuePair("password", "%]Y_Tc;]YD}+D2*CIj]*"));
+		
+	    request.addHeader("content-type", "application/x-www-form-urlencoded");
+	    request.setEntity(new UrlEncodedFormEntity(urlParameters));
+	    HttpResponse response = httpClient.execute(request);
+	    HttpEntity entity = response.getEntity();
+	    String responseString = EntityUtils.toString(entity, "UTF-8");
+	    System.out.println(responseString);
+		
+		
+		//eyJhbJciOiJSUzI1NiJ9.eyJqdGkiOiI4YzYxZDc2MC01YTU3LTQyMWYtOTk4ZS05ZDM1NTFmZWNjZDYiLCJleHAiOjE0NjExMDQyOTgsIm5iZiI6MCwiaWF0IjoxNDYxMTAzOTk4LCJpc3MiOiJodHRwOi8vMTkyLjE2OC45OS4xMDA6OTA5MC9hdXRoL3JlYWxtcy9zaWdudW0tb25lIiwiYXVkIjoic2lnbnVtLW9uZS1kZW1vLWFwcCIsInN1YiI6IjJiYzgxZjcxLWI4ZTQtNDE4My1iZTQwLWIzODEzNTYxYmQzOSIsInR5cCI6IkJlYXJlciIsImF6cCI6InNpZ251bS1vbmUtZGVtby1hcHAiLCJzZXNzaW9uX3N0YXRlIjoiNzUwYzYwMDEtNDhjZC00NzJmLWE3Y2YtNjNkZTY1MDhkYzEyIiwiY2xpZW50X3Nlc3Npb24iOiJlNTE2ZjI0ZC01ZGQzLTQxNmdFtgTQwMC02MmJhM2JlYjhmMjUiLCJhbGxvd2VkLW9yaWdpbnMiOltdLCJyZXNvdXJjZV9hY2Nlc3MiOnsic2lnbnVtLW9uZS1hcGkiOnsicm9sZXMiOlsiYXBwIl19fSwiY2xpZW50SG9zdCI6IjE5Mi4xNjguOTkuMSIsImNsaWVudElkIjoic2lnbnVtLW9uZS1kZW1vLWFwcCIsIm5hbWUiOiIiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJzZXJ2aWNlLWFjY291bnQtc2lnbnVtLW9uZS1kZW1vLWFwcCIsImNsaWVudEFkZHJlc3MiOiIxOTIuMTY4Ljk5LjEiLCJlbWFpbCI6InNlcnZpY2UtYWNjb3VudC1zaWdudW0tb25lLWRlbW8tYXBwQHBsYWNlaG9sZGVyLm9yZyJ9.Jp7xXWaIkyUrWWSldNWmg5FhqqmIKt4jagKYPRiRMceXQo7eh_y765f5Y3CSeVX1KSJaNQjouHSMTTMgMjxbceDIkGM4_scTpqBgNJNEtFx7HydpujjtO36grWwvUA4Xv92frsafq2ZiHl5IW0ChZ-VmwvqBS5n80JetAJp5KGN1xW10Zh0JhRUUZtzN_Rjuw0hPfYvPbYEc2rEVEjujdjMa1hKkNp4F_JhXwd7aVBOTiG8udSukhWPQxI1lReUm47y4vfUDq0I3udPbsK869mbf-MvuY955gVfLv6oevByUzF1UyTlH1Dvv1KBnrpKaMjvWQ-xmAhNTwVx_OOo-CPXw
+		return token;
+	}
+	public void send(String endpoint, ComprobanteElectronico comprobanteElectronico) throws Exception {
+		getToken();
+//		HttpClient httpClient = HttpClientBuilder.create().build();
+//		HttpPost request = new HttpPost(endpoint);
+//		ObjectMapper objectMapper = new ObjectMapper();
+//		String json = objectMapper.writeValueAsString(comprobanteElectronico);
+//		System.out.println(json);
+//	    StringEntity params = new StringEntity(json);
+//	    request.addHeader("content-type", "application/javascript");
+//	    request.addHeader("Authorization", "bearer " + getToken());
+//	    request.setEntity(params);
+//	    HttpResponse response = httpClient.execute(request);
+//	    HttpEntity entity = response.getEntity();
+//	    String responseString = EntityUtils.toString(entity, "UTF-8");
+//	    System.out.println(responseString);
+	}
+}

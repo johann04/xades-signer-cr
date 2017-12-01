@@ -1,0 +1,58 @@
+package com.workoutstudioapp.xadessignercr;
+
+import java.io.File;
+import java.security.KeyStoreException;
+import java.security.cert.X509Certificate;
+import java.util.List;
+
+import xades4j.production.XadesBesSigningProfile;
+import xades4j.production.XadesSigner;
+import xades4j.production.XadesSigningProfile;
+import xades4j.providers.KeyingDataProvider;
+import xades4j.providers.SigningCertChainException;
+import xades4j.providers.impl.FileSystemKeyStoreKeyingDataProvider;
+import xades4j.providers.impl.KeyStoreKeyingDataProvider.SigningCertSelector;
+import xades4j.verification.UnexpectedJCAException;
+
+public class Signer {
+
+	public static void main(String[] args) {
+		Signer signer = new Signer();
+		signer.sign("../test-data/cert.p12", "1234", "../test-data/factura.xml", "../test-data/out.xml");
+	}
+	public void sign(String keyPath, String xmlPath, String password, String outputPath) {
+		try {
+			File keyFile = new File(keyPath);
+			if (!keyFile.exists()) {
+				System.err.println("key file is missing for path: " + keyPath);
+			}
+			XadesSigner signer = getSigner(password, keyPath);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	private XadesSigner getSigner(String password, String pfxPath) throws Exception {
+        try {
+            KeyingDataProvider keyingProvider = getKeyingDataProvider(pfxPath, password);
+            XadesSigningProfile p = new XadesBesSigningProfile(keyingProvider);
+            return p.newSigner();
+        } catch (Exception ex) {
+            throw new Exception("Error " + ex);
+        }
+    }
+    private KeyingDataProvider getKeyingDataProvider(String pfxPath, String password) throws KeyStoreException, SigningCertChainException, UnexpectedJCAException {
+        KeyingDataProvider keyingProvider = new FileSystemKeyStoreKeyingDataProvider("pkcs12", pfxPath, new SigningCertSelector() {
+        	
+
+            public X509Certificate selectCertificate(List<X509Certificate> list) {
+            	System.out.println(list);
+                return list.get(0);
+            }
+        }, new DirectPasswordProvider(password), new DirectPasswordProvider(password), true);
+        if (keyingProvider.getSigningCertificateChain().isEmpty()) {
+            throw new IllegalArgumentException("Cannot initialize keystore with path " + pfxPath);
+        }
+        return keyingProvider;
+    }
+}

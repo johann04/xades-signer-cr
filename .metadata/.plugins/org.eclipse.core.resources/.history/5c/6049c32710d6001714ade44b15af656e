@@ -1,0 +1,11 @@
+package com.workoutstudioapp.xadessignercr;
+
+public class Sender {
+	public static void main(String[] args) {
+		Sender sender = new Sender();
+		sender.send("../test-data/out.xml");
+	}
+	public void send(String xmlPath) {
+		
+	}
+}

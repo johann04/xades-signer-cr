@@ -1,0 +1,129 @@
+package com.workoutstudioapp.xadessignercr;
+
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathFactory;
+
+import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.io.FileUtils;
+import org.apache.http.Header;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.EntityUtils;
+import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
+
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+public class Sender {
+	public static final String ENDPOINT = "https://api.comprobanteselectronicos.go.cr/recepcion-sandbox/v1";
+	private static final String CLAVE = "50612101700020586086000100001010000000161100000637";
+	public static void main(String[] args) {
+		try {
+			String xmlPath = "../test-data/out.xml";
+			
+			Sender sender = new Sender();
+			String username = "cpf-02-0586-0860@stag.comprobanteselectronicos.go.cr";
+			String password = "%]Y_Tc;]YD}+D2*CIj]*";
+			System.out.println("------------------------ send ------------------------");
+			sender.send(ENDPOINT, xmlPath, username, password);
+			//sender.query(ENDPOINT, xmlPath, username, password);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	private String getToken(String username, String password) throws Exception {
+		String token = "";
+		HttpClient httpClient = HttpClientBuilder.create().build();
+		HttpPost request = new HttpPost("https://idp.comprobanteselectronicos.go.cr/auth/realms/rut-stag/protocol/openid-connect/token");
+		List<NameValuePair> urlParameters = new ArrayList<NameValuePair>();
+		urlParameters.add(new BasicNameValuePair("grant_type", "password"));
+		urlParameters.add(new BasicNameValuePair("client_id", "api-stag"));
+		urlParameters.add(new BasicNameValuePair("client_secret", ""));
+		urlParameters.add(new BasicNameValuePair("scope", ""));
+		urlParameters.add(new BasicNameValuePair("username", username));
+		urlParameters.add(new BasicNameValuePair("password", password));
+		
+	    request.addHeader("content-type", "application/x-www-form-urlencoded");
+	    request.setEntity(new UrlEncodedFormEntity(urlParameters));
+	    HttpResponse response = httpClient.execute(request);
+	    HttpEntity entity = response.getEntity();
+	    String responseString = EntityUtils.toString(entity, "UTF-8");
+	    ObjectMapper objectMapper = new ObjectMapper();
+	    Map<String, Object> res = objectMapper.readValue(responseString, new TypeReference<Map<String, Object>>(){});
+	    token = (String) res.get("access_token");
+		return token;
+	}
+	public void send(String endpoint, String xmlPath, String username, String password) throws Exception {
+		XPath xPath = XPathFactory.newInstance().newXPath();
+		File file = new File(xmlPath);
+		String base64 = Base64.encodeBase64String(FileUtils.readFileToByteArray(file));
+		ComprobanteElectronico comprobanteElectronico = new ComprobanteElectronico();
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
+		comprobanteElectronico.setFecha(format.format(new Date()));
+		comprobanteElectronico.setClave(CLAVE);
+		comprobanteElectronico.setComprobanteXml(base64);
+		comprobanteElectronico.setReceptor(new ObligadoTributario("01", "601190899"));
+		comprobanteElectronico.setEmisor(new ObligadoTributario("01", "205860860"));
+		Document xml = XmlHelper.getDocument(xmlPath);
+		NodeList nodes = (NodeList) xPath.evaluate("/FacturaElectronica/Clave", xml.getDocumentElement(), XPathConstants.NODESET);
+		System.out.println(nodes.item(0));
+//		String token = getToken(username, password);
+//		HttpClient httpClient = HttpClientBuilder.create().build();
+//		HttpPost request = new HttpPost(endpoint + "/recepcion");
+//		ObjectMapper objectMapper = new ObjectMapper();
+//		String json = objectMapper.writeValueAsString(comprobanteElectronico);
+//		System.out.println(json);
+//	    StringEntity params = new StringEntity(json);
+//	    request.addHeader("content-type", "application/javascript");
+//	    request.addHeader("Authorization", "bearer " + token);
+//	    request.setEntity(params);
+//	    HttpResponse response = httpClient.execute(request);
+//	    HttpEntity entity = response.getEntity();
+//	    System.out.println("Response code: " + response.getStatusLine().getStatusCode());
+//	    printHeaders(response.getAllHeaders());
+//	    String responseString = EntityUtils.toString(entity, "UTF-8");
+//	    System.out.println(responseString);
+	}
+	private void printHeaders(Header[] headers) {
+		for (Header header : headers) {
+			System.out.println(header.getName() + ": " + header.getValue());
+		}
+	}
+
+	public void query(String endpoint, String xmlPath, String username, String password) throws Exception {
+		String clave = "GET IT FROM THE XML";
+		String emisor = "01205860860";
+		String url = endpoint + "/recepcion/" + clave;
+		String token = getToken(username, password);
+		HttpClient httpClient = HttpClientBuilder.create().build();
+		HttpGet request = new HttpGet(url);
+		request.addHeader("Authorization", "bearer " + token);
+
+	    HttpResponse response = httpClient.execute(request);
+	    System.out.println("Response code: " + response.getStatusLine().getStatusCode());
+	    HttpEntity entity = response.getEntity();
+	    String responseString = EntityUtils.toString(entity, "UTF-8");
+	    ObjectMapper objectMapper = new ObjectMapper();
+	    Map<String, Object> res = objectMapper.readValue(responseString, new TypeReference<Map<String, Object>>(){});
+	    String respuestaXML = (String) res.get("respuesta-xml");
+	    respuestaXML = new String(Base64.decodeBase64(respuestaXML), "UTF-8");
+	    System.out.println(respuestaXML);
+	}
+}

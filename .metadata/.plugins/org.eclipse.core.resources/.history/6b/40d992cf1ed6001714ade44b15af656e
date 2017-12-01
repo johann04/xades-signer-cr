@@ -1,0 +1,48 @@
+package com.workoutstudioapp.xadessignercr;
+
+import java.io.File;
+import java.util.Date;
+
+import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.io.FileUtils;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.HttpClientBuilder;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+public class Sender {
+	public static final String ENDPOINT = "https://api.comprobanteselectronicos.go.cr/recepcion-sandbox/v1/";
+	public static void main(String[] args) {
+		try {
+			String xmlPath = "../test-data/out.xml";
+			File file = new File(xmlPath);
+			String base64 = Base64.encodeBase64String(FileUtils.readFileToByteArray(file));
+			ComprobanteElectronico comprobanteElectronico = new ComprobanteElectronico();
+			comprobanteElectronico.setFecha(new Date());
+			comprobanteElectronico.setClave("50612101700310168271100100001010000000161100000531");
+			comprobanteElectronico.setComprobanteXml(base64);
+			comprobanteElectronico.setEmisor(new ObligadoTributario("01", "601190899"));
+			comprobanteElectronico.setReceptor(new ObligadoTributario("01", "205860860"));
+			Sender sender = new Sender();
+			sender.send(ENDPOINT, comprobanteElectronico);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public void send(String endpoint, ComprobanteElectronico comprobanteElectronico) throws Exception {
+		HttpClient httpClient = HttpClientBuilder.create().build();
+		HttpPost request = new HttpPost(endpoint);
+		ObjectMapper objectMapper = new ObjectMapper();
+		String json = objectMapper.writeValueAsString(comprobanteElectronico);
+		System.out.println(json);
+	    StringEntity params = new StringEntity(json);
+	    request.addHeader("content-type", "application/javascript");
+//	    request.setEntity(params);
+//	    HttpResponse response = httpClient.execute(request);
+//	    HttpEntity entity = response.getEntity();
+//	    String responseString = EntityUtils.toString(entity, "UTF-8");
+//	    System.out.println(responseString);
+	}
+}
