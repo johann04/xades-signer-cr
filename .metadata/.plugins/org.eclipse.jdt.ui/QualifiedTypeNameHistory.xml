@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="com.workoutstudioapp.xadessignercr.Signer"/>
-<fullyQualifiedTypeName name="javax.security.cert.X509Certificate"/>
-<fullyQualifiedTypeName name="java.security.cert.CertificateFactory"/>
-<fullyQualifiedTypeName name="java.util.List"/>
-<fullyQualifiedTypeName name="java.security.cert.X509Certificate"/>
-</qualifiedTypeNameHistroy>

@@ -1,8 +1,0 @@
-package com.workoutstudioapp.xadessignercr;
-
-public class ComprobanteElectronico {
-	private String clave;
-	private String fecha;
-	private ObligadoTributario emisor;
-	private ObligadoTributario receptor;
-}
