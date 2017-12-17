@@ -25,7 +25,7 @@ public class Cli {
 			xmlInPath = args[3];
 			xmlOutPath = args[4];
 			Signer signer = new Signer();
-			signer.sign(keyPath, password, xmlInPath, xmlOutPath);
+			signer.sign(keyPath, keyPassword, xmlInPath, xmlOutPath);
 			System.exit(0);
 		} else if ("send".equals(action)) {
 			endPoint = args[1];
@@ -34,6 +34,14 @@ public class Cli {
 			password = args[4];
 			Sender sender = new Sender();
 			sender.send(endPoint, xmlPath, username, password);
+			System.exit(0);
+		} else if ("query".equals(action)) {
+			endPoint = args[1];
+			xmlPath = args[2];
+			username = args[3];
+			password = args[4];
+			Sender sender = new Sender();
+			sender.query(endPoint, xmlPath, username, password);
 			System.exit(0);
 		} else {
 			showUsage();
@@ -44,5 +52,6 @@ public class Cli {
 		System.out.println("Usage:");
 		System.out.println("java -jar xades-signer-cr sign <keyPath> <keyPassword> <xmlInPath> <xmlOutPath>");
 		System.out.println("java -jar xades-signer-cr send <endPoint> <xmlPath> <username> <password>");
+		System.out.println("java -jar xades-signer-cr query <endPoint> <xmlPath> <username> <password>");
 	}
 }

@@ -34,8 +34,10 @@ import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 
+import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class Sender {
@@ -47,7 +49,7 @@ public class Sender {
 			Sender sender = new Sender();
 			String username = "cpf-02-0586-0860@stag.comprobanteselectronicos.go.cr";
 			String password = "%]Y_Tc;]YD}+D2*CIj]*";
-			System.out.println("------------------------ send ------------------------");
+			//System.out.println("------------------------ send ------------------------");
 			sender.send(ENDPOINT, xmlPath, username, password);
 			
 			// sleep two seconds before we query...
@@ -116,48 +118,52 @@ public class Sender {
 			HttpPost request = new HttpPost(endpoint + "/recepcion");
 			ObjectMapper objectMapper = new ObjectMapper();
 			String json = objectMapper.writeValueAsString(comprobanteElectronico);
-			System.out.println(json);
+			//System.out.println(json);
 			StringEntity params = new StringEntity(json);
 			request.addHeader("content-type", "application/javascript");
 			request.addHeader("Authorization", "bearer " + token);
 			request.setEntity(params);
 			HttpResponse response = httpClient.execute(request);
 			HttpEntity entity = response.getEntity();
-			System.out.println("Response code: " + response.getStatusLine().getStatusCode());
+			//System.out.println("Response code: " + response.getStatusLine().getStatusCode());
 			printHeaders(response.getAllHeaders());
 			String responseString = EntityUtils.toString(entity, "UTF-8");
-			System.out.println(responseString);
+			//System.out.println(responseString);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 	private void printHeaders(Header[] headers) {
 		for (Header header : headers) {
-			System.out.println(header.getName() + ": " + header.getValue());
+			//System.out.println(header.getName() + ": " + header.getValue());
 		}
 	}
 
-	public void query(String endpoint, String xmlPath, String username, String password) throws Exception {
-		XPath xPath = XPathFactory.newInstance().newXPath();
-		Document xml = XmlHelper.getDocument(xmlPath);
-		
-		NodeList nodes = (NodeList) xPath.evaluate("/FacturaElectronica/Clave", xml.getDocumentElement(), XPathConstants.NODESET);
-		String clave = nodes.item(0).getTextContent();
+	public void query(String endpoint, String xmlPath, String username, String password) {
+		try {
+			XPath xPath = XPathFactory.newInstance().newXPath();
+			Document xml = XmlHelper.getDocument(xmlPath);
+			
+			NodeList nodes = (NodeList) xPath.evaluate("/FacturaElectronica/Clave", xml.getDocumentElement(), XPathConstants.NODESET);
+			String clave = nodes.item(0).getTextContent();
 
-		String url = endpoint + "/recepcion/" + clave;
-		String token = getToken(username, password);
-		HttpClient httpClient = HttpClientBuilder.create().build();
-		HttpGet request = new HttpGet(url);
-		request.addHeader("Authorization", "bearer " + token);
+			String url = endpoint + "/recepcion/" + clave;
+			String token = getToken(username, password);
+			HttpClient httpClient = HttpClientBuilder.create().build();
+			HttpGet request = new HttpGet(url);
+			request.addHeader("Authorization", "bearer " + token);
 
-	    HttpResponse response = httpClient.execute(request);
-	    System.out.println("Response code: " + response.getStatusLine().getStatusCode());
-	    HttpEntity entity = response.getEntity();
-	    String responseString = EntityUtils.toString(entity, "UTF-8");
-	    ObjectMapper objectMapper = new ObjectMapper();
-	    Map<String, Object> res = objectMapper.readValue(responseString, new TypeReference<Map<String, Object>>(){});
-	    String respuestaXML = (String) res.get("respuesta-xml");
-	    respuestaXML = new String(Base64.decodeBase64(respuestaXML), "UTF-8");
-	    System.out.println(respuestaXML);
+			HttpResponse response = httpClient.execute(request);
+			System.out.println("Response code: " + response.getStatusLine().getStatusCode());
+			HttpEntity entity = response.getEntity();
+			String responseString = EntityUtils.toString(entity, "UTF-8");
+			ObjectMapper objectMapper = new ObjectMapper();
+			Map<String, Object> res = objectMapper.readValue(responseString, new TypeReference<Map<String, Object>>(){});
+			String respuestaXML = (String) res.get("respuesta-xml");
+			respuestaXML = new String(Base64.decodeBase64(respuestaXML), "UTF-8");
+			System.out.println(respuestaXML);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }
