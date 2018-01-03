@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FacturaElectronica xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="https://tribunet.hacienda.go.cr/docs/esquemas/2017/v4.2/facturaElectronica">
+  <Clave>50619121700010632039501000005010000000166116117306</Clave>
+  <NumeroConsecutivo>01000005010000000166</NumeroConsecutivo>
+  <FechaEmision>2017-12-19T16:00:02</FechaEmision>
+  <Emisor>
+    <Nombre>Henry Gerardo Obando Chinchilla</Nombre>
+    <Identificacion>
+      <Tipo>01</Tipo>
+      <Numero>106320395</Numero>
+    </Identificacion>
+    <NombreComercial>Henry Gerardo Obando Chinchilla</NombreComercial>
+    <Ubicacion>
+      <Provincia>1</Provincia>
+      <Canton>01</Canton>
+      <Distrito>05</Distrito>
+      <OtrasSenas>250 mts sur de la Iglesia Católica</OtrasSenas>
+    </Ubicacion>
+    <Telefono>
+      <CodigoPais>506</CodigoPais>
+      <NumTelefono>83932090</NumTelefono>
+    </Telefono>
+    <Fax xsi:nil="true" />
+    <CorreoElectronico>henry.obando@gmail.com</CorreoElectronico>
+  </Emisor>
+  <Receptor>
+    <Nombre>Henry Obando Chinchilla</Nombre>
+    <Identificacion>
+      <Tipo>01</Tipo>
+      <Numero>106320395</Numero>
+    </Identificacion>
+    <Ubicacion>
+      <Provincia>1</Provincia>
+      <Canton>01</Canton>
+      <Distrito>05</Distrito>
+      <Barrio>18</Barrio>
+      <OtrasSenas>zapote centro.</OtrasSenas>
+    </Ubicacion>
+    <CorreoElectronico>henry.obando@gmail.com</CorreoElectronico>
+  </Receptor>
+  <CondicionVenta>01</CondicionVenta>
+  <MedioPago>01</MedioPago>
+  <DetalleServicio>
+    <LineaDetalle>
+      <NumeroLinea>1</NumeroLinea>
+      <Codigo>
+        <Tipo>04</Tipo>
+        <Codigo>10</Codigo>
+      </Codigo>
+      <Cantidad>1</Cantidad>
+      <UnidadMedida>Unid</UnidadMedida>
+      <UnidadMedidaComercial />
+      <Detalle>Consulta General</Detalle>
+      <PrecioUnitario>50000.00</PrecioUnitario>
+      <MontoTotal>50000.00</MontoTotal>
+      <SubTotal>50000.00</SubTotal>
+      <MontoTotalLinea>50000.00</MontoTotalLinea>
+    </LineaDetalle>
+  </DetalleServicio>
+  <ResumenFactura>
+    <CodigoMoneda>CRC</CodigoMoneda>
+    <TipoCambio>1</TipoCambio>
+    <TotalServGravados>0.00</TotalServGravados>
+    <TotalServExentos>50000.00</TotalServExentos>
+    <TotalMercanciasGravadas>0.00</TotalMercanciasGravadas>
+    <TotalMercanciasExentas>0.00</TotalMercanciasExentas>
+    <TotalGravado>0.00</TotalGravado>
+    <TotalExento>50000.00</TotalExento>
+    <TotalVenta>50000.00</TotalVenta>
+    <TotalDescuentos>0.00</TotalDescuentos>
+    <TotalVentaNeta>50000.00</TotalVentaNeta>
+    <TotalImpuesto>0.00</TotalImpuesto>
+    <TotalComprobante>50000.00</TotalComprobante>
+  </ResumenFactura>
+  <Normativa>
+    <NumeroResolucion>DGT-R-48-2016</NumeroResolucion>
+    <FechaResolucion>20-02-2017 13:22:22</FechaResolucion>
+  </Normativa>
+<ds:Signature xmlns:ds="http://www.w3.org/2000/09/xmldsig#" Id="Id-9f0c8d08-f68f-4112-98a7-7adfb0ea2183"><ds:SignedInfo><ds:CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" /><ds:SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256" /><ds:Reference Id="r-id-a5580157-59e9-45d2-95db-7c9b7ef91da1" URI=""><ds:Transforms><ds:Transform Algorithm="http://www.w3.org/TR/1999/REC-xpath-19991116"><ds:XPath>not(ancestor-or-self::ds:Signature)</ds:XPath></ds:Transform><ds:Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></ds:Transforms><ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256" /><ds:DigestValue>bKsBDhFPcDJKPyv0uAyhPLKNH5rJYf9/nkuuC8VvB2A=</ds:DigestValue></ds:Reference><ds:Reference Type="http://uri.etsi.org/01903#SignedProperties" URI="#xades-Id-9f0c8d08-f68f-4112-98a7-7adfb0ea2183"><ds:Transforms><ds:Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></ds:Transforms><ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256" /><ds:DigestValue>TfYtrZaiKqxHE8GF02avf006ckgabodE8cTGnRSrQxg=</ds:DigestValue></ds:Reference></ds:SignedInfo><ds:SignatureValue Id="value-id-9f0c8d08-f68f-4112-98a7-7adfb0ea2183">hGf1wqXYZvs3h746WoNRutFf/ZICWbuhc7YX5a4O6SX2QXOu+fIUz9YxsIcqUNogZ+X/Mb3wxOCLaVR8SHRH0QxHJFEh2iCxEvxAeT74Jamlh6LB8CYlzV/hbWv/l7sHgHZUqURQgubiuKGgE02K+nnCS7f2D1Z30yrEyO4exsq1+3MltPeTUYR2Ku5bGN/RSAc7gin3t06PN1QnjucTj/iFMyq2YhE9xCUqvnYNMx0AbSX9nQaxbqFDKpPcv+DLVvUKPDhw6GO+W8Z1wxpuegemeRGMSUxOY3buiWzRsQq1w3ah0Cr9cTxN1nb/U9qmHZTFWvy7pkEmbMQ6sOXcwA==</ds:SignatureValue><ds:KeyInfo><ds:X509Data><ds:X509Certificate>MIIFZTCCA02gAwIBAgIGAWAPoI+FMA0GCSqGSIb3DQEBCwUAMGwxCzAJBgNVBAYTAkNSMSkwJwYDVQQKDCBNSU5JU1RFUklPIERFIEhBQ0lFTkRBIC0gU0FOREJPWDEMMAoGA1UECwwDREdUMSQwIgYDVQQDDBtDQSBQRVJTT05BIEZJU0lDQSAtIFNBTkRCT1gwHhcNMTcxMjAxMDExMTA4WhcNMTkxMjAxMDExMTA4WjCBrTEZMBcGA1UEBRMQQ1BGLTAxLTA2MzItMDM5NTEaMBgGA1UEBAwRT0JBTkRPIENISU5DSElMTEExFjAUBgNVBCoMDUhFTlJZIEdFUkFSRE8xCzAJBgNVBAYTAkNSMRcwFQYDVQQKDA5QRVJTT05BIEZJU0lDQTEMMAoGA1UECwwDQ1BGMSgwJgYDVQQDDB9IRU5SWSBHRVJBUkRPIE9CQU5ETyBDSElOQ0hJTExBMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAk7u1zgkVA1q1G4RCIULGYZSPrqhVENLDJZ4Nf6E8WuMbCK0i0qwcIfj7h30b835F7i/DxkNCSV1mTWWSnes3frtLahWEgquif8Ygfowx7vV8NVX5VcR6rmn2VSjLa8Wg1cVwNRuIfNWne99960h5rI//xJteT1XQAvV6ljKzJbLPYSJFzIQLybZacGO8iuJzNKKSbOGKfhkOciEVf1y3ux+zVZIb131df2iLLqIDNKzq0mypoxDcQfSfAcpPj55qIMh/LDUKrIO4wW3ci2Jjb30TvTBVYjzLAx8bEXWFIDXXe2u5TRQQTQvqCc9Nf/PjG9J5tW8pYuSSkdmy8BTTpQIDAQABo4HKMIHHMB8GA1UdIwQYMBaAFEYj0kRPv1dZIeS/k9Uwm5VM4/eHMB0GA1UdDgQWBBRLSkzifnkj0ibYoR5ECfCt4/yqEjALBgNVHQ8EBAMCBsAwEwYDVR0lBAwwCgYIKwYBBQUHAwQwYwYIKwYBBQUHAQEEVzBVMFMGCCsGAQUFBzAChkdodHRwczovL3BraS5jb21wcm9iYW50ZXNlbGVjdHJvbmljb3MuZ28uY3Ivc3RhZy9pbnRlcm1lZGlhdGUtcGYtcGVtLmNydDANBgkqhkiG9w0BAQsFAAOCAgEAhV+N/dxuzrtgJhJrTmpuw+e06JoK140i1o5NEGDdsgi/TuAbo8qvTbBQGLCVWLsNAS6bO3Mj2RqAphcshLalQczJSueOhBDFq5dzxcocKzxM6Woq9v/V8y/PFv7lDaWm+fQPzQ1M7qjk0MJly0qxn7uMtQO8tMowHWC04df+zbevr/PgzjlaPZ3D2707PP33IHhOwqpwyDJY7poz3ZarYtxJdwxh7oQOBeynAufXOb+w4KklPEmdB/B9ORMMsiuLnUYbBkdi6pk304utgW+CN8hfAUJXqEhAeQr2cqJWWjIMuvNSY8/XpooWfWFEcLg3mBmzFjmo+A0+XEajPKh2AZf4Jff7KQybmGAs2ccIHvIcqxTnn062+sga/s4MyeJsoyB5PxmCl9RwOPA+gEh69MzE5vNICSvCs7j9bCenZ2xowmdiLid7EDNstng+rtiQb6a15Y7/kkT+I+OUxRJTLKvbG1NtERJAwg5u8I7Qwiw4G/009badyK8bKvA8/qy8cZ0QzM/PGqnlzfl/aBtL7/JR7BRVg3JKvMgHKBA2YN/z3VcwN8smoEbFgK5Lcem9tpnGJ1L/6CbrDgDpiiLNN4XPB7NIeB0vahDjH2BCyyK5n9WZaTsO2GL9SJljCd3NSCEXWEDR4LBxIj9jsN4fQN6CHuyAbbmRiYJEC2e4lD0=</ds:X509Certificate></ds:X509Data></ds:KeyInfo><ds:Object><xades:QualifyingProperties xmlns:xades="http://uri.etsi.org/01903/v1.3.2#" Id="QualifyingProperties-ca9f2717-52c8-4d82-87af-759ca7a9fb93" Target="#Id-9f0c8d08-f68f-4112-98a7-7adfb0ea2183"><xades:SignedProperties Id="xades-Id-9f0c8d08-f68f-4112-98a7-7adfb0ea2183"><xades:SignedSignatureProperties><xades:SigningTime>2017-12-19T15:01:09-07:00</xades:SigningTime><xades:SigningCertificate><xades:Cert><xades:CertDigest><ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" /><ds:DigestValue>wgKJ8c5vhYdd37Fb3vp0qhF7LqY=</ds:DigestValue></xades:CertDigest><xades:IssuerSerial><ds:X509IssuerName>CN=CA PERSONA FISICA - SANDBOX, OU=DGT, O=MINISTERIO DE HACIENDA - SANDBOX, C=CR</ds:X509IssuerName><ds:X509SerialNumber>1512090668933</ds:X509SerialNumber></xades:IssuerSerial></xades:Cert></xades:SigningCertificate><xades:SignaturePolicyIdentifier><xades:SignaturePolicyId><xades:SigPolicyId><xades:Identifier>https://tribunet.hacienda.go.cr/docs/esquemas/2016/v4.1/Resolucion_Comprobantes_Electronicos_DGT-R-48-2016.pdf</xades:Identifier><xades:Description /></xades:SigPolicyId><xades:SigPolicyHash><ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256" /><ds:DigestValue>NmI5Njk1ZThkNzI0MmIzMGJmZDAyNDc4YjUwNzkzODM2NTBiOWUxNTBkMmI2YjgzYzZjM2I5NTZlNDQ4OWQzMQ==</ds:DigestValue></xades:SigPolicyHash></xades:SignaturePolicyId></xades:SignaturePolicyIdentifier></xades:SignedSignatureProperties><xades:SignedDataObjectProperties><xades:DataObjectFormat ObjectReference="#r-id-a5580157-59e9-45d2-95db-7c9b7ef91da1"><xades:MimeType>application/octet-stream</xades:MimeType></xades:DataObjectFormat></xades:SignedDataObjectProperties></xades:SignedProperties></xades:QualifyingProperties></ds:Object></ds:Signature></FacturaElectronica>

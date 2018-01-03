@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FacturaElectronica xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="https://tribunet.hacienda.go.cr/docs/esquemas/2017/v4.2/facturaElectronica">
-    <Clave>50612101700020586086000100001010000000161100000642</Clave>
-    <NumeroConsecutivo>00100001010000000161</NumeroConsecutivo>
-    <FechaEmision>2017-10-12T11:47:42.539375-06:00</FechaEmision>
+    <Clave>50612101700020586086000100001010000000182100000644</Clave>
+    <NumeroConsecutivo>00100001010000000182</NumeroConsecutivo>
+    <FechaEmision>2017-12-29T10:47:42.539375-06:00</FechaEmision>
     <Emisor>
         <Nombre>Johan Chaves Saborio</Nombre>
         <Identificacion>
@@ -21,10 +21,6 @@
             <CodigoPais>506</CodigoPais>
             <NumTelefono>88862760</NumTelefono>
         </Telefono>
-        <Fax>
-            <CodigoPais>506</CodigoPais>
-            <NumTelefono>00000000</NumTelefono>
-        </Fax>
         <CorreoElectronico>johann04@gmail.com</CorreoElectronico>
     </Emisor>
     <Receptor>
@@ -45,10 +41,6 @@
             <CodigoPais>506</CodigoPais>
             <NumTelefono>83439500</NumTelefono>
         </Telefono>
-        <Fax>
-            <CodigoPais>506</CodigoPais>
-            <NumTelefono>506</NumTelefono>
-        </Fax>
         <CorreoElectronico>rt@prueba.com</CorreoElectronico>
     </Receptor>
     <CondicionVenta>02</CondicionVenta>
