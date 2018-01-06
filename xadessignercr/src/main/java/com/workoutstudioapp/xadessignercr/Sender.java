@@ -1,6 +1,7 @@
 package com.workoutstudioapp.xadessignercr;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
@@ -48,7 +49,7 @@ public class Sender {
 			
 			Sender sender = new Sender();
 			String username = "cpf-02-0586-0860@stag.comprobanteselectronicos.go.cr";
-			String password = "%]Y_Tc;]YD}+D2*CIj]*";
+			String password = "d[-_+1J)mt$%+X$@LsC4";
 			//System.out.println("------------------------ send ------------------------");
 			sender.send(ENDPOINT, xmlPath, username, password);
 			
@@ -83,18 +84,20 @@ public class Sender {
 		return token;
 	}
 	public void send(String endpoint, String xmlPath, String username, String password) {
-		try {
+		try {			
 			XPath xPath = XPathFactory.newInstance().newXPath();
 			File file = new File(xmlPath);
-			String base64 = Base64.encodeBase64String(FileUtils.readFileToByteArray(file));
+			byte[] bytes = FileUtils.readFileToString(file, "UTF-8").getBytes("UTF-8");
+			String base64 = Base64.encodeBase64String(bytes);
 			ComprobanteElectronico comprobanteElectronico = new ComprobanteElectronico();
 			comprobanteElectronico.setComprobanteXml(base64);
 
 			Document xml = XmlHelper.getDocument(xmlPath);
 			NodeList nodes = (NodeList) xPath.evaluate("/FacturaElectronica/Clave", xml.getDocumentElement(), XPathConstants.NODESET);
 			comprobanteElectronico.setClave(nodes.item(0).getTextContent());
-//		nodes = (NodeList) xPath.evaluate("/FacturaElectronica/FechaEmision", xml.getDocumentElement(), XPathConstants.NODESET);
-//		comprobanteElectronico.setFecha(nodes.item(0).getTextContent());
+			nodes = (NodeList) xPath.evaluate("/FacturaElectronica/FechaEmision", xml.getDocumentElement(), XPathConstants.NODESET);
+			//comprobanteElectronico.setFecha(nodes.item(0).getTextContent());
+
 			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
 			comprobanteElectronico.setFecha(format.format(new Date()));
 			
@@ -118,7 +121,7 @@ public class Sender {
 			HttpPost request = new HttpPost(endpoint + "/recepcion");
 			ObjectMapper objectMapper = new ObjectMapper();
 			String json = objectMapper.writeValueAsString(comprobanteElectronico);
-			//System.out.println(json);
+			System.out.println(json);
 			StringEntity params = new StringEntity(json);
 			request.addHeader("content-type", "application/javascript");
 			request.addHeader("Authorization", "bearer " + token);
@@ -157,6 +160,9 @@ public class Sender {
 			System.out.println("Response code: " + response.getStatusLine().getStatusCode());
 			HttpEntity entity = response.getEntity();
 			String responseString = EntityUtils.toString(entity, "UTF-8");
+			System.out.println("<responseString>");
+			System.out.println(responseString);
+			System.out.println("</responseString>");
 			ObjectMapper objectMapper = new ObjectMapper();
 			Map<String, Object> res = objectMapper.readValue(responseString, new TypeReference<Map<String, Object>>(){});
 			String respuestaXML = (String) res.get("respuesta-xml");
