@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
-<FacturaElectronica xmlns="https://tribunet.hacienda.go.cr/docs/esquemas/2017/v4.2/facturaElectronica" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <Clave>50612101700020586086000100001010000000182100000644</Clave>
-    <NumeroConsecutivo>00100001010000000182</NumeroConsecutivo>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><FacturaElectronica xmlns="https://tribunet.hacienda.go.cr/docs/esquemas/2017/v4.2/facturaElectronica" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <Clave>50612101700020586086000100001010000000187100000644</Clave>
+    <NumeroConsecutivo>00100001010000000187</NumeroConsecutivo>
     <FechaEmision>2017-12-29T10:47:42.539375-06:00</FechaEmision>
     <Emisor>
         <Nombre>Johan Chaves Saborio</Nombre>
@@ -29,13 +28,13 @@
             <Tipo>02</Tipo>
             <Numero>3001123208</Numero>
         </Identificacion>
-        <NombreComercial />
+        <NombreComercial/>
         <Ubicacion>
             <Provincia>1</Provincia>
             <Canton>01</Canton>
             <Distrito>01</Distrito>
             <Barrio>01</Barrio>
-            <OtrasSenas />
+            <OtrasSenas/>
         </Ubicacion>
         <Telefono>
             <CodigoPais>506</CodigoPais>
@@ -55,11 +54,11 @@
             </Codigo>
             <Cantidad>1.000</Cantidad>
             <UnidadMedida>Unid</UnidadMedida>
-            <UnidadMedidaComercial />
+            <UnidadMedidaComercial/>
             <Detalle>Diseño Estructural</Detalle>
             <PrecioUnitario>1175.00000</PrecioUnitario>
             <MontoTotal>1175.00000</MontoTotal>
-            <NaturalezaDescuento />
+            <NaturalezaDescuento/>
             <SubTotal>1175.00000</SubTotal>
             <MontoTotalLinea>1175.00000</MontoTotalLinea>
         </LineaDetalle>
@@ -86,36 +85,32 @@
     <Otros>
         <OtroTexto codigo="obs">BNCR $ 200-</OtroTexto>
     </Otros>
-    <ds:Signature xmlns:ds="http://www.w3.org/2000/09/xmldsig#" Id="xmldsig-b819f140-6ead-4462-8be1-25e5abbc74fd">
-        <ds:SignedInfo>
-            <ds:CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
-            <ds:SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256" />
-            <ds:Reference Id="xmldsig-b819f140-6ead-4462-8be1-25e5abbc74fd-ref0" URI="">
-                <ds:Transforms>
-                    <ds:Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
-                </ds:Transforms>
-                <ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256" />
-                <ds:DigestValue>wsBBNtsPWj6EV8rBdFFbdWrN3e1xseINBkKuytti5FU=</ds:DigestValue>
-            </ds:Reference>
-            <ds:Reference URI="#xmldsig-b819f140-6ead-4462-8be1-25e5abbc74fd-keyinfo">
-                <ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256" />
-                <ds:DigestValue>UL5hfB7zSXl8QQJ+RNg6fTCvJOxXIZvwtWglkz7VeKw=</ds:DigestValue>
-            </ds:Reference>
-            <ds:Reference Type="http://uri.etsi.org/01903#SignedProperties" URI="#xmldsig-b819f140-6ead-4462-8be1-25e5abbc74fd-signedprops">
-                <ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256" />
-                <ds:DigestValue>o3T+7eoVbCuBqQryqHz8LNzQjGB0knXtIk8DM0EqEuM=</ds:DigestValue>
-            </ds:Reference>
-        </ds:SignedInfo>
-        <ds:SignatureValue Id="xmldsig-b819f140-6ead-4462-8be1-25e5abbc74fd-sigvalue">
-Zgsp5QwfiJBmuWXSPBJJJFFEpWPxVzd3dwUnlYTagmW8d4IhbcL61dIvnPi9bDkyay8A1g4kBboC
-asZw7/AOIRlR++V9TdOGlcxl+sM6ZQ0ZMSrjVTLSHR0WIu58siViPZubPrayHBmTlPdLKPLdjnSs
-p+/KzDx/e6gfomRKpmxKN8iuX9L/s8HRCGzTRYY2nDaFJhMYmxHVs4hfXQzzo83M6o4QsDQH/Dpt
-VhhFjLd6jMaGg0iNQ7qgf2ByS4BD+WUGRSQboQgeqvzVMLc7Dbxod3QI46FD4nOcRID7DUR7RL1Y
-2Y0s/GyIoff8sa8e/eF9hj84UhbJ7JuAt800wA==
+<ds:Signature xmlns:ds="http://www.w3.org/2000/09/xmldsig#" Id="xmldsig-df3af3a1-3c83-445d-b65f-d106d30cc54e">
+<ds:SignedInfo>
+<ds:CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/>
+<ds:SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256"/>
+<ds:Reference Id="xmldsig-df3af3a1-3c83-445d-b65f-d106d30cc54e-ref0" URI="">
+<ds:Transforms>
+<ds:Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/>
+</ds:Transforms>
+<ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/>
+<ds:DigestValue>AHn9GIG8lPZpPYnLUQiMsxpHWY31w6FSdGGa9EuXpLs=</ds:DigestValue>
+</ds:Reference>
+<ds:Reference Type="http://uri.etsi.org/01903#SignedProperties" URI="#xmldsig-df3af3a1-3c83-445d-b65f-d106d30cc54e-signedprops">
+<ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/>
+<ds:DigestValue>9NoMbN53OkFMAdjYwvLpBDMZ70nwPJ/pPRrzwQFI/E8=</ds:DigestValue>
+</ds:Reference>
+</ds:SignedInfo>
+<ds:SignatureValue Id="xmldsig-df3af3a1-3c83-445d-b65f-d106d30cc54e-sigvalue">
+U2FBiDNrIKDCoaEEkcRFVgIo20PBJ4WAlnn/QZ8OxPnQYwI/Bl2yPNB4eJPiHw/nR+pHOWiRb7sm
+HYX/5q2DXmTF3L5l1vStKU6i3UXrgA+mE1A69UOB+BiNKIBbOQThiQXcivxIh7PDFUr9QDF4ky4/
+Q4gk00puvJ39VQed9xcyFWUYSF31j6dU6RqDRfcOqjKNC531TzBm3iGxyItxzqKOoslVJfkJVOmS
+2xAotGvmCOu/sKgDeMnWul9dj8lFbrw/lvqdewCLhDW4IiFIhwI18kuQAmxssKSFFAMKIivi8fob
+vER8UI7PdznGegIY4/cwSasPN8n0QVLVJTyJug==
 </ds:SignatureValue>
-        <ds:KeyInfo Id="xmldsig-b819f140-6ead-4462-8be1-25e5abbc74fd-keyinfo">
-            <ds:X509Data>
-                <ds:X509Certificate>
+<ds:KeyInfo>
+<ds:X509Data>
+<ds:X509Certificate>
 MIIFWzCCA0OgAwIBAgIGAWBnbG9QMA0GCSqGSIb3DQEBCwUAMGwxCzAJBgNVBAYTAkNSMSkwJwYD
 VQQKDCBNSU5JU1RFUklPIERFIEhBQ0lFTkRBIC0gU0FOREJPWDEMMAoGA1UECwwDREdUMSQwIgYD
 VQQDDBtDQSBQRVJTT05BIEZJU0lDQSAtIFNBTkRCT1gwHhcNMTcxMjE4MDIyMDQ3WhcNMTkxMjE4
@@ -142,82 +137,7 @@ VptiqHV8+cnT4OoviI6oq78emXJx1OMDRCW1ylQ1keQk2N++SKlNQ+e0vFfuVaGW2YP8CoBzzIch
 +7HLlaQXQQ/QrqSVHPjCSRDOgciZzwybbifUbEjhmxR52qUFRkSNp+JaYFViwEhYoqFfr05J2GBK
 GtO8jO/8Ag==
 </ds:X509Certificate>
-            </ds:X509Data>
-            <ds:KeyValue>
-                <ds:RSAKeyValue>
-                    <ds:Modulus>
-uCq6kgVK9sl+x2KKNF+Lsenl7ewxwDhleWh5TU8Rlr2yczHNWnHxvHFjAZHU2zrmN4Aq03wDaOxp
-lN3Wj4w8agPvVh9yShasuDPxXnDtFJgu05k05u2VM2VacxrAucMWKWYnwzdwtVy2ZIwjoLZXLjwH
-DjYWau5zcN52nYFMYEzQPLKRtL0LWQhKA5ztLod+ScHY2nITFrI6MIE4q9xtH+qVALn0HHiECPr3
-7t5wf+77EzEUid2cJsv/mGGd0vSBe9uwIi7AuLHlQIOVti7RMffyj0Pjc/QRhSOTp0Nl7Mqjfvmm
-QDbAB3tMqx/QC1DGRyI02bvcAHQOZA7gdb2QYw==
-</ds:Modulus>
-                    <ds:Exponent>AQAB</ds:Exponent>
-                </ds:RSAKeyValue>
-            </ds:KeyValue>
-        </ds:KeyInfo>
-        <ds:Object>
-            <xades:QualifyingProperties xmlns:xades="http://uri.etsi.org/01903/v1.3.2#" xmlns:xades141="http://uri.etsi.org/01903/v1.4.1#" Target="#xmldsig-b819f140-6ead-4462-8be1-25e5abbc74fd">
-                <xades:SignedProperties Id="xmldsig-b819f140-6ead-4462-8be1-25e5abbc74fd-signedprops">
-                    <xades:SignedSignatureProperties>
-                        <xades:SigningTime>2017-12-29T22:01:27.711-06:00</xades:SigningTime>
-                        <xades:SigningCertificate>
-                            <xades:Cert>
-                                <xades:CertDigest>
-                                    <ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256" />
-                                    <ds:DigestValue>XhmVkDcfVQkHVB4+aOAehIQ9hwppOxPj7Wj3Nsjy9wo=</ds:DigestValue>
-                                </xades:CertDigest>
-                                <xades:IssuerSerial>
-                                    <ds:X509IssuerName>CN=CA PERSONA FISICA - SANDBOX,OU=DGT,O=MINISTERIO DE HACIENDA - SANDBOX,C=CR</ds:X509IssuerName>
-                                    <ds:X509SerialNumber>1513563647824</ds:X509SerialNumber>
-                                </xades:IssuerSerial>
-                            </xades:Cert>
-                            <xades:Cert>
-                                <xades:CertDigest>
-                                    <ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256" />
-                                    <ds:DigestValue>rOEoDXGBv8br9NcsL0IalX5ZHPE1bqpfv6Y5HkHi7a4=</ds:DigestValue>
-                                </xades:CertDigest>
-                                <xades:IssuerSerial>
-                                    <ds:X509IssuerName>CN=CA RAIZ MINISTERIO DE HACIENDA - SANDBOX,OU=DGT,O=MINISTERIO DE HACIENDA - SANDBOX,C=CR</ds:X509IssuerName>
-                                    <ds:X509SerialNumber>1487213906</ds:X509SerialNumber>
-                                </xades:IssuerSerial>
-                            </xades:Cert>
-                            <xades:Cert>
-                                <xades:CertDigest>
-                                    <ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256" />
-                                    <ds:DigestValue>WTahqh6Cibwomn6J8nQCWGteAU4pm/mul0vsuZcHDh8=</ds:DigestValue>
-                                </xades:CertDigest>
-                                <xades:IssuerSerial>
-                                    <ds:X509IssuerName>CN=CA RAIZ MINISTERIO DE HACIENDA - SANDBOX,OU=DGT,O=MINISTERIO DE HACIENDA - SANDBOX,C=CR</ds:X509IssuerName>
-                                    <ds:X509SerialNumber>1487212660</ds:X509SerialNumber>
-                                </xades:IssuerSerial>
-                            </xades:Cert>
-                        </xades:SigningCertificate>
-                        <xades:SignaturePolicyIdentifier>
-                            <xades:SignaturePolicyId>
-                                <xades:SigPolicyId>
-                                    <xades:Identifier>https://tribunet.hacienda.go.cr/docs/esquemas/2017/v4.2/Resolucion%20Comprobantes%20Electronicos%20%20DGT-R-48-2016.pdf</xades:Identifier>
-                                </xades:SigPolicyId>
-                                <xades:SigPolicyHash>
-                                    <ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-                                    <ds:DigestValue>Ohixl6upD6av8N7pEvDABhEL6hM=</ds:DigestValue>
-                                </xades:SigPolicyHash>
-                            </xades:SignaturePolicyId>
-                        </xades:SignaturePolicyIdentifier>
-                        <xades:SignerRole>
-                            <xades:ClaimedRoles>
-                                <xades:ClaimedRole>ObligadoTributario</xades:ClaimedRole>
-                            </xades:ClaimedRoles>
-                        </xades:SignerRole>
-                    </xades:SignedSignatureProperties>
-                    <xades:SignedDataObjectProperties>
-                        <xades:DataObjectFormat ObjectReference="#xmldsig-b819f140-6ead-4462-8be1-25e5abbc74fd-ref0">
-                            <xades:MimeType>text/xml</xades:MimeType>
-                            <xades:Encoding>UTF-8</xades:Encoding>
-                        </xades:DataObjectFormat>
-                    </xades:SignedDataObjectProperties>
-                </xades:SignedProperties>
-            </xades:QualifyingProperties>
-        </ds:Object>
-    </ds:Signature>
-</FacturaElectronica>
+</ds:X509Data>
+</ds:KeyInfo>
+<ds:Object><xades:QualifyingProperties xmlns:xades="http://uri.etsi.org/01903/v1.3.2#" xmlns:xades141="http://uri.etsi.org/01903/v1.4.1#" Target="#xmldsig-df3af3a1-3c83-445d-b65f-d106d30cc54e"><xades:SignedProperties Id="xmldsig-df3af3a1-3c83-445d-b65f-d106d30cc54e-signedprops"><xades:SignedSignatureProperties><xades:SigningTime>2018-01-05T21:32:12.381-06:00</xades:SigningTime><xades:SigningCertificate><xades:Cert><xades:CertDigest><ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/><ds:DigestValue>XhmVkDcfVQkHVB4+aOAehIQ9hwppOxPj7Wj3Nsjy9wo=</ds:DigestValue></xades:CertDigest><xades:IssuerSerial><ds:X509IssuerName>CN=CA PERSONA FISICA - SANDBOX,OU=DGT,O=MINISTERIO DE HACIENDA - SANDBOX,C=CR</ds:X509IssuerName><ds:X509SerialNumber>1513563647824</ds:X509SerialNumber></xades:IssuerSerial></xades:Cert></xades:SigningCertificate><xades:SignaturePolicyIdentifier><xades:SignaturePolicyId><xades:SigPolicyId><xades:Identifier>https://tribunet.hacienda.go.cr/docs/esquemas/2017/v4.2/facturaElectronica</xades:Identifier></xades:SigPolicyId><xades:SigPolicyHash><ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/><ds:DigestValue>nVCrSwvK8dNnGHwfLYAzNAQMe5FCQjMl2Pf+Nfu5IBw=</ds:DigestValue></xades:SigPolicyHash></xades:SignaturePolicyId></xades:SignaturePolicyIdentifier></xades:SignedSignatureProperties></xades:SignedProperties></xades:QualifyingProperties></ds:Object>
+</ds:Signature></FacturaElectronica>
