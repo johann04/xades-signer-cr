@@ -11,5 +11,7 @@ java -jar xades-signer-cr query <endPoint> <xmlPath> <username> <password>
 ```
 
 **sign** firma el xml.
+
 **send** envía el xml a hacienda.
+
 **query** consulta el status de una factura basado en su xml (lee el consecutivo del archivo y consulta ese consecutivo).
