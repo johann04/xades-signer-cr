@@ -43,24 +43,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class Sender {
 	public static final String ENDPOINT = "https://api.comprobanteselectronicos.go.cr/recepcion-sandbox/v1";
-	public static void main(String[] args) {
-		try {
-			String xmlPath = "../test-data/out.xml";
-			
-			Sender sender = new Sender();
-			String username = "cpf-02-0586-0860@stag.comprobanteselectronicos.go.cr";
-			String password = "d[-_+1J)mt$%+X$@LsC4";
-			//System.out.println("------------------------ send ------------------------");
-			sender.send(ENDPOINT, xmlPath, username, password);
-			
-			// sleep two seconds before we query...
-			Thread.currentThread().sleep(2000);
-			sender.query(ENDPOINT, xmlPath, username, password);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 	private String getToken(String username, String password) throws Exception {
 		String token = "";
 		HttpClient httpClient = HttpClientBuilder.create().build();

@@ -27,11 +27,6 @@ import xades4j.providers.SignaturePolicyInfoProvider;
 import xades4j.providers.impl.FileSystemKeyStoreKeyingDataProvider;
 
 public class Signer {
-
-	public static void main(String[] args) {
-		Signer signer = new Signer();
-		signer.sign("../test-data/cert.p12", "5678", "../test-data/factura.xml", "../test-data/out.xml");
-	}
 	public void sign(String keyPath, String password, String xmlInPath, String xmlOutPath) {
 		KeyingDataProvider kp;
 try {
