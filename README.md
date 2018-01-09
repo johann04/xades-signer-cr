@@ -16,4 +16,4 @@ java -jar xades-signer-cr query <endPoint> <xmlPath> <username> <password>
 
 **query** consulta el status de una factura basado en su xml (lee el consecutivo del archivo y consulta ese consecutivo).
 
-Este proyecto iba a ser utilizado en la implementación de firma digital de mi proyecto https://www.facebook.com/workoutstudioapp pero finalmente no lo utilicé... si le pareció útil siempre me puede colaborar con un like ;)
+Este proyecto iba a ser utilizado en la implementación de firma digital de mi proyecto https://www.facebook.com/workoutstudioapp pero finalmente no lo utilicé... si le pareció útil siempre me puede colaborar con un like.
